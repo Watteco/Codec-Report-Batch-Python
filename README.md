@@ -1,12 +1,20 @@
+English
+------------ 
+------------ 
+
 Python implementation of `br_uncompress`
 
-# Requirements 
+Requirements
+------------ 
 
 This code needs Python 3.6 or more recent version.
 
-# Usage
+Usage
+------------ 
+------------ 
 
-## From the command line
+From the command line
+------------ 
 
 The usage is quite similar to the C version.
 
@@ -41,7 +49,8 @@ Here is the usage (obtained by executing `./br_uncompress.py -h`):
       -v, --verbose         Print details of the process on standard output
 
 
-## As a module
+As a module
+------------ 
 
 The uncompress function can be imported in another Python code:
 
@@ -78,7 +87,9 @@ With a batch absolute timestamp:
         "2018-11-05T10:35:09.685Z",
     )
 
-# Testing
+Testing
+------------ 
+------------ 
 
 Tests are written in `test_br_uncompress.py`. Py.test module is needed to run them.
 
@@ -89,4 +100,109 @@ Install py.test by doing:
 Or directly with pip
 
     pip install pytest
+
+
+Français
+------------ 
+------------ 
+
+Implémentation en Python de `br_uncompress`
+
+Pré-requis
+------------ 
+
+Ce code nécessite Python 3.6 ou une verison plus récente.
+
+utilisation
+------------ 
+------------ 
+
+En ligne de commande
+------------ 
+
+L'utilisation est similaire à la version C.
+
+Voilà 2 exemples:
+
+      py br_uncompress.py -a 3 2,1.0,12 -if $10$27$00$80$03$93$20$18$00$80$10$81$83$07$0d$45$85$10$05
+
+Ou
+
+      py br_uncompress.py -a 3 2,10,9 1,10,7 4,30,10 3,10,4 5,10,6 6,1,4 -if 404780800a5800000442ca8a4048fd395c817e21cb9a40028fd5379de3768b4f816e75a6e376006e2d800066
+
+Voilà l'utilisation (obtenu en faisant `./br_uncompress.py -h`):
+
+    usage: br_uncompress.py [-h] [-a] [-t TIMESTAMP] [-v]
+                            tagsz [command [command ...]] [-if]
+
+
+
+    arguments:
+      tagsz
+      command               In form of "taglbl,resol,sampletype" "..." or
+                            "taglbl,resol,sampletype,taglbl"
+
+    arguments optionnels:
+      -h, --help            show this help message and exit
+      -a, --ascii           Input buf must be considered as ascii hexa bytes
+                            either than usual raw bytes: 'hhhhhh...' or 'hh hh
+                            hh...' or '$HH$HH$HH...'
+      -t TIMESTAMP, --timestamp TIMESTAMP
+                            Timestamp of the measure in iso format like
+                            2018-11-05T10:35:09.685Z
+      -v, --verbose         Print details of the process on standard output
+
+
+Comme module
+------------ 
+
+La fonction uncompress peut être importée dans d'autres codes Python:
+
+    from br_uncompress import uncompress
+    result = uncompress(
+        3,
+        [{"taglbl": 2, "lblname": "temperature", "resol": 1.0, "sampletype": 12}],
+        "$10$27$00$80$03$93$20$18$00$80$10$81$83$07$0d$45$85$10$05",
+    )
+
+Sans lblname:
+
+    from br_uncompress import uncompress
+    result = uncompress(
+        1,
+        [
+            {"taglbl": 0, "resol": 1, "sampletype": 10},
+            {"taglbl": 1, "resol": 1, "sampletype": 1},
+        ],
+        "20100000a020a8010000004401e297ad40871b770e377b",
+    )
+
+
+Avec un batch avec timestamp:
+
+    from br_uncompress import uncompress
+    result = uncompress(
+        1,
+        [
+            {"taglbl": 0, "resol": 1, "sampletype": 10},
+            {"taglbl": 1, "resol": 1, "sampletype": 1},
+        ],
+        "20100000a020a8010000004401e297ad40871b770e377b",
+        "2018-11-05T10:35:09.685Z",
+    )
+
+Test
+------------ 
+------------ 
+
+Les tests sont écrits dans `test_br_uncompress.py`. le module Py.test est nécessaire pour les faire tourner.
+
+Installer py.test en faisant:
+
+    pipenv install --dev
+
+Ou avec pip
+
+    pip install pytest
+
 

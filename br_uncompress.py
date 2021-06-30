@@ -75,14 +75,14 @@ class Buffer:
         if sample_type in (constants.ST_I4,constants.ST_I8, constants.ST_I16,constants.ST_I24) and u32 & (
             1 << (nb_bits - 1)
         ):
-            for i in range(nb_bits, 32):
+            for i in range(nb_bits, 64):
                 u32 |= 1 << i
                 nb_bits += 1
         
         if sample_type in (constants.ST_I4,constants.ST_I8,constants.ST_I16, constants.ST_I24,constants.ST_I32) and u32 & (
             1 << (nb_bits - 1)
         ):
-           return ctypes.c_long(u32).value
+           return ctypes.c_longlong(u32).value
         return u32
 
     def next_bi_from_hi(self, huff_coding):
