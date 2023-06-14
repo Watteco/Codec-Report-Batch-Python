@@ -586,7 +586,7 @@ def uncompress(tagsz, arg_list, hex_string, batch_absolute_timestamp=None):
                                 arg_list[ii]["sampletype"],
                                 bm_st_sz(arg_list[ii]["sampletype"]),
                             )
-                            P.print(f"  Complete {current_measure.value}")
+                            P.print(f"  Complete {current_measure.data.value}")
                         out.series[ii].uncompress_samples.append(current_measure)
     P.print("\nTimestamp of the sending")
     global_timestamp = 0
