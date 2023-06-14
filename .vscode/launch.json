@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: br_uncompress.py",
+            "type": "python",
+            "request": "launch",
+            "program": "br_uncompress.py",
+            "justMyCode": true,
+            "args": 
+            [
+                "-v", "-a", 
+                "3", "0,1,6", "1,0.1,12",
+                "-if",
+                "1004008000238C1C0241C6AE4EA9EEE82B61DC71630EB7CBCA5F01"
+            ]
+        }
+    ]
+}
